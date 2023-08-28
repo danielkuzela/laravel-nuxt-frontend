@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    html {
+        @apply overflow-y-scroll; /* we do this because we do not want any Jumping Scrollbar Issues */
+    }
+}
