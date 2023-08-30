@@ -18,7 +18,7 @@ const { data, status } = await useCustomFetch('/api/form', { params: { form_id: 
 
 const underlayClass = computed(() => {
     const base = [
-        'absolute inset-0 w-full h-full z-50 overflow-hidden'
+        'fixed inset-0 w-full h-full z-50 overflow-hidden'
     ];
 
     if (props.style == "modal") {
