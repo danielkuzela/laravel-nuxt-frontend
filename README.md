@@ -10,12 +10,17 @@ Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introdu
   * TailwindCSS docs: https://tailwindcss.com/docs/installation
 
 - #### Nuxt Image
-  * Image compiler etc.
+  * Image compiler etc. Recommended to use on every image.
   * Module docs: https://v1.image.nuxtjs.org/
 
 - #### Pinia
   * Vue store for setting global variables etc.
   * Module docs: https://nuxt.com/modules/pinia
+
+- #### AOS
+  * Animate on scroll library
+  * Library docs: https://michalsnik.github.io/aos/
+
 
 ## Setup
 
@@ -27,7 +32,7 @@ Make sure to install the dependencies:
 # npm
 npm install
 
-# pnpm
+# pnpm (recommended)
 pnpm install
 ```
 
@@ -41,6 +46,9 @@ npm run dev
 
 # pnpm
 pnpm run dev
+
+# or just
+nuxt dev
 ```
 
 ## Production

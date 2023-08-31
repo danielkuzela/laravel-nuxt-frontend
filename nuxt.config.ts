@@ -16,7 +16,7 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     '@pinia/nuxt',
     '@nuxtjs/i18n',
-    '@nuxt/image',
+    '@nuxt/image'
   ],
 
 
@@ -64,11 +64,11 @@ export default defineNuxtConfig({
 
   routeRules: {
     '/api/**': {
-      proxy: { to: "http://localhost:8000/api/**" },
+      proxy: { to: process.env.API_SOURCE_URL + "/api/**" },
     },
 
     '/sanctum/**': {
-      proxy: { to: "http://localhost:8000/sanctum/**" },
+      proxy: { to: process.env.API_SOURCE_URL + "/sanctum/**" },
     },
 
     '/mailchimp/**': {

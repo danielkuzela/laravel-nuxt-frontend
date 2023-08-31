@@ -42,7 +42,7 @@ const { data } = await useCustomFetch('/api/articles', { params: { prefix: artic
             <h2 :class="[ styleStore.h2baseStyle, 'text-center mx-auto']">{{ $t('article.gallery') }}</h2>
             <div class="columns-3 gap-4">
                 <template v-for="photo in data.article.photos">
-                    <div class="mb-4">
+                    <div class="mb-4" data-aos="zoom-in-up">
                         <ElementsImageLoader :data="photo.image" :classes="'w-full'" rounded zoomable></ElementsImageLoader>
                         <span v-if="photo.title" class="px-3 py-1 block text-gray-400 text-sm">&copy; {{ photo.author }} &middot; {{ photo.title }}</span>
                     </div>
@@ -51,7 +51,7 @@ const { data } = await useCustomFetch('/api/articles', { params: { prefix: artic
         </template>
 
         <h2 :class="[ styleStore.h2baseStyle, 'text-center mx-auto']">{{ $t('article.related') }}</h2>
-        <div class="grid grid-cols-3 gap-10 mb-10">
+        <div class="grid grid-cols-3 gap-10 mb-10" data-aos="zoom-in-up">
             <template v-for="item in data.articles">
                 <ElementsArticleItem :data="item" :flag="articles_data.prefix" />
             </template>

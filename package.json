@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "@pinia/nuxt": "^0.4.11",
+    "aos": "^2.3.4",
     "moment": "^2.29.4",
     "nuxt-csurf": "^1.2.0",
     "pinia": "^2.1.6",
