@@ -13,6 +13,10 @@ export const base = {
     navigation: "",
     navigationLink: "p-3",
     navigationLinkCta: "bg-violet-400 rounded-md text-white",
+    navigationDropdownWrapper: "absolute left-1/2 -translate-x-2/4 min-w-[150px] top-full bg-white flex flex-col py-2 rounded-lg shadow-sm overflow-hidden",
+    navigationDropdownLink: "px-6 py-2 block hover:bg-gray-100 w-full text-center",
+
+    mobileMenuWrapper: "absolute bg-white p-10 w-3/4 h-screen top-0 left-full h-screen transition-all duration-500",
 
     breadcrumbWrapper: "",
     breadcrumbList: "flex list-style-none justify-center",

@@ -7,8 +7,7 @@
       <div :class="containerMaxW">
           <div class="grid grid-cols-3">
               <div class="col">
-                  <h2>Mailchimp Signup Example</h2>
-                  <ElementsMailchimpSignup :firstname="false" :lastname="true" />
+
               </div>
 
           </div>

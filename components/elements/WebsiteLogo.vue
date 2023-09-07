@@ -4,11 +4,12 @@ import ImageLoader from "~/components/elements/ImageLoader.vue";
 
 const { data } = await useCustomFetch('/api/settings', { params: { name: 'logo'}});
 const styleStore = useStyleStore();
+const logoRoot = ref(null);
 
 </script>
 
 <template>
-    <div>
+    <div ref="logoRoot">
         <template v-if="data">
             <nuxt-img :src="data.data[0].url"
                       :alt="data.data[0].description"

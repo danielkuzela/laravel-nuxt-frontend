@@ -1,16 +1,13 @@
 <script setup>
-
 import { useStyleStore } from "~/stores/style";
-import WebsiteLogo from "~/components/elements/WebsiteLogo.vue";
-import Navigation from "~/components/layout/Navigation.vue";
 
 const styleStore = useStyleStore();
 
 const props = defineProps({
-   fixed: {
+    fixed: {
        type: Boolean,
        default: false
-   }
+    },
 });
 
 const scrollY = ref(0);
@@ -51,22 +48,27 @@ if(hasStickyHeader) {
         isSticky.value = newValue > stickyHeaderPoint;
     });
 }
-</script>
 
+const MobileMenuOpened = ref(false);
+provide('mobile_menu_opened', MobileMenuOpened);
+
+</script>
 
 
 <template>
     <header :class="[headerClasses]">
+
         <div :class="[
              headerContainerClasses ]"
         >
             <NuxtLinkLocale to="/">
-                <WebsiteLogo />
+                <ElementsWebsiteLogo />
             </NuxtLinkLocale>
 
-            <Navigation />
+            <LayoutNavigation position="header" />
         </div>
     </header>
+    <LayoutNavigation position="mobile" />
 </template>
 
 

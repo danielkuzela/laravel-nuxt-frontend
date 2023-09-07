@@ -35,6 +35,15 @@ const loadMoreStyle = ref(false);
 
 const { data: ItemsData, error, status: ItemsStatus } = await useCustomLazyFetch('/api/universal', { params: { entity: props.data.id, module: props.data.prefix, paginate: props.data.paginate, page: currentPage, lang: locale.value} })
 
+const fetchData = async () => {
+    fetchedData.value = ItemsData.value;
+    fetchedStatus.value = ItemsStatus.value;
+};
+
+onMounted(async () => {
+    fetchData();
+});
+
 watch(ItemsStatus, (newData) => {
     if (loadMoreStyle.value == false) {
         fetchedStatus.value = ItemsStatus.value;

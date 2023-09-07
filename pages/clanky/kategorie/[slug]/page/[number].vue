@@ -5,7 +5,8 @@ const articles_data = {
         cs: 'clanky',
         en: 'articles',
     },
-    tag: route.params.slug
+    category: route.params.slug,
+    page: route.params.number
 }
 </script>
 

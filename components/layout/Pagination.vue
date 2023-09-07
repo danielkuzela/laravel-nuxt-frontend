@@ -48,7 +48,7 @@ const loadMore = inject('load_more');
                 <ElementsBaseButton
                         v-if="item.url != null"
                         as="a"
-                        :href="route ? '/' + route + '/page/' + getPageParamFromUrl(item.url) : ''"
+                        :href="route ? route + '/page/' + getPageParamFromUrl(item.url) : ''"
                         @click.prevent="currentPage = getPageParamFromUrl(item.url)"
                         type="button"
                         :label="(extractLabelWithoutHtmlEntities(item.label) == ' Předchozí' ? $t('pagination.previous') : (extractLabelWithoutHtmlEntities(item.label) == 'Další ' ? $t('pagination.next') : item.label))"
@@ -64,7 +64,7 @@ const loadMore = inject('load_more');
               <li class="mx-px" v-if="(extractLabelWithoutHtmlEntities(item.label) == ' Předchozí' || extractLabelWithoutHtmlEntities(item.label) == 'Další ')">
                   <ElementsBaseButton
                           as="a"
-                          :href="route ? '/' + route + '/page/' + getPageParamFromUrl(item.url) : ''"
+                          :href="route ? route + '/page/' + getPageParamFromUrl(item.url) : ''"
                           v-if="item.url != null"
                           @click.prevent="currentPage = getPageParamFromUrl(item.url)"
                           type="button"
@@ -80,7 +80,7 @@ const loadMore = inject('load_more');
           <li class="mx-px" v-if="(currentPage != lastPage)">
               <ElementsBaseButton
                       as="a"
-                      :href="route ? '/' + route + '/page/' + (currentPage + 1) : ''"
+                      :href="route ? route + '/page/' + (currentPage + 1) : ''"
                       @click.prevent="[loadMore = true, currentPage = currentPage + 1]"
                       type="button"
                       :label="$t('pagination.loadmore')"

@@ -16,9 +16,24 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     '@pinia/nuxt',
     '@nuxtjs/i18n',
-    '@nuxt/image'
+    '@nuxt/image',
+    'vue3-carousel-nuxt',
+    '@nuxtjs/google-fonts',
+    'nuxt-gtag'
   ],
 
+  gtag: {
+    id: process.env.GOOGLE_ANALYTICS_ID,
+  },
+
+  googleFonts: {
+    families: {
+      'Open Sans': [100, 300, 500, 700, 900],
+    },
+    outputDir: 'assets',
+    fontsDir: 'fonts',
+    stylePath: 'css/google-fonts.css'
+  },
 
   tailwindcss: {
     cssPath: '~/assets/css/main.css',
@@ -34,6 +49,24 @@ export default defineNuxtConfig({
       'test-router/index': {
         en: '/english-test-router',
       },
+      'clanky/index': {
+        en: '/articles',
+      },
+      'clanky/[slug]/index': {
+        en: '/articles/:slug',
+      },
+      'clanky/page/[number]': {
+        en: '/articles/page/:number',
+      },
+      'clanky/tag/[slug]': {
+        en: '/articles/tag/:slug',
+      },
+      'clanky/kategorie/[slug]/index': {
+        en: '/articles/category/:slug',
+      },
+      'clanky/kategorie/[slug]/page/[number]': {
+        en: '/articles/category/:slug/page/:number',
+      },
     },
     detectBrowserLanguage: {
       useCookie: true,
@@ -43,13 +76,13 @@ export default defineNuxtConfig({
   },
 
   image: {
-    domains: ['localhost', 'localhost:8000', '127.0.0.1', '127.0.0.1:8000', process.env.API_SOURCE_URL],
+    domains: ['localhost', 'localhost:8000', '127.0.0.1', '127.0.0.1:8000', process.env.APP_URL],
   },
-
 
   runtimeConfig: {
     public: {
-      baseUrl: process.env.API_SOURCE_URL,
+      baseUrl: process.env.APP_URL,
+      serverUrl: process.env.API_URL,
       accessToken:  process.env.API_ACCESS_TOKEN,
       recaptcha: {
         siteKey: process.env.RECAPTCHA_SITE_KEY
@@ -64,11 +97,11 @@ export default defineNuxtConfig({
 
   routeRules: {
     '/api/**': {
-      proxy: { to: process.env.API_SOURCE_URL + "/api/**" },
+      proxy: { to: process.env.API_URL + "/api/**" },
     },
 
     '/sanctum/**': {
-      proxy: { to: process.env.API_SOURCE_URL + "/sanctum/**" },
+      proxy: { to: process.env.API_URL + "/sanctum/**" },
     },
 
     '/mailchimp/**': {

@@ -4,6 +4,8 @@
 
 @layer base {
     html {
-        @apply overflow-y-scroll; /* we do this because we do not want any Jumping Scrollbar Issues */
+        @apply overflow-y-scroll;
+        @apply font-['Open_Sans'];
     }
+
 }

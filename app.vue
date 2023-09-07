@@ -2,17 +2,21 @@
 
 import { createPinia } from 'pinia';
 import { useStyleStore } from "@/stores/style";
-import BaseLayout from "~/layouts/BaseLayout.vue";
+import { useI18n } from "vue-i18n";
 
-
-
+const { locale, t } = useI18n();
 const pinia = createPinia();
-
-/* Styles */
-
 const styleStore = useStyleStore();
+
 styleStore.setStyle();
 
+useHead({
+    titleTemplate: `${t('web.title')} | %s`,
+    meta: [
+        { name: 'author', content: `FOREGROUND s.r.o.` },
+        { name: 'robots', content: `index,follow` }
+    ]
+})
 
 
 </script>

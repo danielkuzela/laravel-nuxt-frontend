@@ -4,6 +4,9 @@ import { NuxtLink } from "#components";
 import BaseIcon from "~/components/elements/BaseIcon.vue";
 
 const props = defineProps({
+    status: {
+        type: String
+    },
     label: {
         type: [String, Number],
         default: null,
@@ -21,10 +24,6 @@ const props = defineProps({
         default: null,
     },
     target: {
-        type: String,
-        default: null,
-    },
-    routeName: {
         type: String,
         default: null,
     },
@@ -49,6 +48,7 @@ const props = defineProps({
     active: Boolean,
     disabled: Boolean,
     roundedFull: Boolean,
+    hasPendingState: Boolean,
 });
 
 const is = computed(() => {
@@ -77,14 +77,10 @@ const labelClass = computed(() =>
 
 const componentClass = computed(() => {
     const base = [
-        "inline-flex",
-        "justify-center",
-        "items-center",
+        "inline-flex relative justify-center items-center",
         "whitespace-nowrap",
-        "focus:outline-none",
-        "transition-colors",
-        "focus:ring",
-        "duration-150",
+        "focus:outline-none focus:ring",
+        "transition-colors duration-150",
         "border",
         props.disabled ? "cursor-not-allowed" : "cursor-pointer",
         props.roundedFull ? "rounded-full" : "rounded",
@@ -99,25 +95,30 @@ const componentClass = computed(() => {
         base.push("py-2", props.roundedFull ? "px-6" : "px-3");
     }
 
-    if (props.disabled) {
-        base.push(props.outline ? "opacity-50" : "opacity-70");
-    }
 
     return base;
 });
+
+const buttonRoot = ref(null);
 </script>
 
 <template>
     <component
             :is="is"
             :class="componentClass"
-            :href="routeName ? route(routeName) : href"
+            :href="localePath(href)"
             :type="computedType"
             :target="target"
             :disabled="disabled"
             :onclick="onclick"
+            ref="buttonRoot"
     >
-        <BaseIcon v-if="icon" :type="icon" :size="iconSize" />
-        <span v-if="label" :class="labelClass">{{ label }}</span>
+        <BaseIcon v-if="icon" :type="icon" :size="iconSize" :class="[ (hasPendingState && status == 'pending' ? 'opacity-0' : '') ]" />
+        <span v-if="label" :class="[ labelClass, (hasPendingState && status == 'pending' ? 'opacity-0' : '') ]">{{ label }}</span>
+
+        <span v-if="hasPendingState && status == 'pending'" class="absolute flex h-3 w-3">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-3 w-3 bg-white"></span>
+        </span>
     </component>
 </template>

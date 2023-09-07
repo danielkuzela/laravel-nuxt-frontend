@@ -6,7 +6,7 @@ export const darkModeKey = "darkMode";
  * GLOBAL LAYOUT VARIABLES
  *
  **/
-export const containerMaxW = "xl:max-w-screen-2xl xl:mx-auto";
+export const containerMaxW = "xl:max-w-screen-2xl xl:mx-auto px-4";
 
 
 /**

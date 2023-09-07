@@ -1,6 +1,9 @@
 <script setup>
 const articles_data = {
-    prefix: 'clanky'
+    prefix: {
+        cs: 'clanky',
+        en: 'articles',
+    }
 }
 </script>
 

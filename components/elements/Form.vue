@@ -26,7 +26,7 @@ const formData = ref({
     success: false,
     errors: {},
     response: '',
-    status: 'pending',
+    status: 'unsent',
 });
 
 const form = ref({
@@ -48,6 +48,8 @@ fieldIds.forEach(id => {
 async function sendForm(){
     // is honeypot is not empty its just a fucking bot
     if(form.value.email_honeypot == ''){
+
+        formData.value.status = 'pending';
 
         // this is 'just in case' variable
         form.value.email_honeypot = props.data.honey + '@simplo.cz';
@@ -76,9 +78,10 @@ async function sendForm(){
         });
 
         // send the request and save response data to formData object
-        const { data: responseData, status } = await useCustomFetch('/api/form/' + props.data.id + '/submit', { method: "POST", watch: false, body: formDataR, headers: { 'X-XSRF-TOKEN': token.value }, lazy: true})
+        const { data: responseData, status: responseStatus } = await useCustomFetch('/api/form/' + props.data.id + '/submit', { method: "POST", watch: false, body: formDataR, headers: { 'X-XSRF-TOKEN': token.value }, lazy: true})
 
         formData.value.response = responseData;
+        formData.value.status = responseStatus;
 
         if(responseData.value.errors) {
             for (const key in responseData.value.errors) {
@@ -129,7 +132,8 @@ async function sendForm(){
             </ElementsFormField>
         </template>
         <ElementsFormControl name="email_honeypot" type="text" v-model="form.email_honeypot" placeholder="Honeypot" class="overflow-hidden w-0 h-0" />
-        <ElementsBaseButton color="primary" type="submit" :label="(data.localisation[0].submit_text ? data.localisation[0].submit_text : 'Odeslat')"></ElementsBaseButton>
+        <ElementsBaseButton :status="formData.status" hasPendingState :disabled="formData.status == 'pending'" color="primary" type="submit" :label="(data.localisation[0].submit_text ? data.localisation[0].submit_text : 'Odeslat')"></ElementsBaseButton>
+
         <p v-html="$t('forms.reCaptcha')" class="pt-6"></p>
     </form>
 </template>

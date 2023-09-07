@@ -3,21 +3,36 @@ import { useI18n } from "vue-i18n";
 import { useStyleStore } from "~/stores/style";
 
 
-const { locale } = useI18n();
+const { locale, t } = useI18n();
 
 import 'moment/locale/cs';
 import moment from "moment/moment";
 moment.locale(locale.value);
 
+const config = useRuntimeConfig();
 const route = useRoute();
 const styleStore = useStyleStore();
 
 const articles_data = {
-    prefix: 'clanky'
+    prefix: {
+        cs: 'clanky',
+        en: 'articles',
+    }
 }
 
-const { data } = await useCustomFetch('/api/articles', { params: { prefix: articles_data.prefix, lang: locale.value, item: route.params.slug }})
+const { data } = await useCustomFetch('/api/articles', { params: { prefix: articles_data.prefix[locale.value], lang: locale.value, item: route.params.slug }})
 
+if(data && data.value) {
+    useSeoMeta({
+        title: data.value.article.seo_title ? data.value.article.seo_title : data.value.article.title,
+        description: data.value.article.seo_description,
+        ogTitle: t('web.title') + ' | ' + (data.value.article.open_graph.title ? data.value.article.open_graph.title : (data.value.article.seo_title ? data.value.article.seo_title : data.value.article.title)),
+        ogDescription: data.value.article.open_graph.description ? data.value.article.open_graph.description : data.value.article.seo_description,
+        ogType: 'article',
+        ogUrl: config.public.baseUrl + route.path,
+        ogImage: config.public.serverUrl + '/media/example-theme-assets/media-placeholder.png',
+    })
+}
 
 </script>
 
@@ -31,7 +46,7 @@ const { data } = await useCustomFetch('/api/articles', { params: { prefix: artic
         </div>
         <p class="max-w-4xl text-center mx-auto" v-if="data.article.perex">{{ data.article.perex }}</p>
         <ElementsImageLoader v-if="data.article.image !== null" :data="data.article.image" class="mx-auto py-6"></ElementsImageLoader>
-        <div v-html="data.article.text"></div>
+        <div v-html="data.article.text" v-if="data.article.text !== null"></div>
         <template v-if="data.article.tags !== null">
             <ul class="flex gap-1 pt-6">
                 <li v-for="tag in data.article.tags"><ElementsBaseButton :href="'/' + data.flag.url + '/tag/' + tag.slug" :label="tag.name" color="basicDark" small rounded-full></ElementsBaseButton></li>
@@ -42,8 +57,8 @@ const { data } = await useCustomFetch('/api/articles', { params: { prefix: artic
             <h2 :class="[ styleStore.h2baseStyle, 'text-center mx-auto']">{{ $t('article.gallery') }}</h2>
             <div class="columns-3 gap-4">
                 <template v-for="photo in data.article.photos">
-                    <div class="mb-4" data-aos="zoom-in-up">
-                        <ElementsImageLoader :data="photo.image" :classes="'w-full'" rounded zoomable></ElementsImageLoader>
+                    <div class="mb-4">
+                        <ElementsImageLoader :data="photo.image" :classes="'w-full'" rounded zoomable aos></ElementsImageLoader>
                         <span v-if="photo.title" class="px-3 py-1 block text-gray-400 text-sm">&copy; {{ photo.author }} &middot; {{ photo.title }}</span>
                     </div>
                 </template>
@@ -51,9 +66,9 @@ const { data } = await useCustomFetch('/api/articles', { params: { prefix: artic
         </template>
 
         <h2 :class="[ styleStore.h2baseStyle, 'text-center mx-auto']">{{ $t('article.related') }}</h2>
-        <div class="grid grid-cols-3 gap-10 mb-10" data-aos="zoom-in-up">
+        <div class="grid grid-cols-3 gap-10 mb-10"  >
             <template v-for="item in data.articles">
-                <ElementsArticleItem :data="item" :flag="articles_data.prefix" />
+                <ElementsArticleItem :data="item" :flag="articles_data.prefix[locale]" />
             </template>
         </div>
 

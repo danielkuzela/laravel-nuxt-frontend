@@ -19,6 +19,10 @@ const props = defineProps({
         type: Boolean,
         default: false
     },
+    aos: {
+        type: Boolean,
+        default: false
+    },
 
 })
 
@@ -34,7 +38,8 @@ const zoomed = ref(false);
             'aspect-[2/' + aspect + ']',
             'block relative overflow-hidden group',
             rounded ? 'rounded-xl' : ''
-            ]">
+            ]"
+            :data-aos="aos ? 'zoom-in-up' : ''">
             <div class="bg-gray-200 absolute w-full h-full animate-pulse" v-if="!transparent"></div>
             <div class="grid place-items-center h-full w-full absolute" v-if="!transparent">
                 <svg class="animate-spin -ml-1 mr-3 h-8 w-8 text-black" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">

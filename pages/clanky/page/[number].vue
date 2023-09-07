@@ -1,7 +1,10 @@
 <script setup>
 const route = useRoute();
 const articles_data = {
-    prefix: 'clanky',
+    prefix: {
+        cs: 'clanky',
+        en: 'articles',
+    },
     page: route.params.number
 }
 </script>

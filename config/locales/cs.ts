@@ -2,6 +2,11 @@ import { useStyleStore } from "~/stores/style";
 const styleStore = useStyleStore();
 
 export const cs_language_pack = {
+    web: {
+        title: 'Foreground Nuxt'
+    },
+
+
     welcome: 'Vítej',
 
 
@@ -13,9 +18,17 @@ export const cs_language_pack = {
 
     article: {
         created_by: 'vytvořil/a',
+        show_article: 'Zobrazit článek',
+
         gallery: 'Galerie',
         related: 'Mohlo by vás zajímat',
-        tags: 'Tagy'
+
+        tags: 'Tagy',
+        categories: 'Kategorie',
+        slugs: {
+            tags: 'tag',
+            categories: 'kategorie'
+        }
     },
 
     pagination: {
@@ -24,14 +37,14 @@ export const cs_language_pack = {
         loadmore: 'Načíst další',
     },
 
+    breadcrumbs: {
+        home: 'Domů'
+    },
+
     forms: {
         placeholder: 'Načítám formulář...',
 
-        reCaptcha: () => `
-            Tyto stránky jsou chráněny díky reCAPTCHA, na které se vztahují 
-            <a href="https://policies.google.com/privacy" class="${styleStore.baseLinkStyle}" target="_blank">Zásady ochrany osobních údajů</a> a
-            <a href="https://policies.google.com/terms" class="${styleStore.baseLinkStyle}" target="_blank">Smluvní podmínky</a> společnosti Google.
-        `,
+        reCaptcha: () => `Tyto stránky jsou chráněny díky reCAPTCHA, na které se vztahují <a href="https://policies.google.com/privacy" class="${styleStore.baseLinkStyle}" target="_blank">Zásady ochrany osobních údajů</a> a <a href="https://policies.google.com/terms" class="${styleStore.baseLinkStyle}" target="_blank">Smluvní podmínky</a> společnosti Google.`,
 
         newsletter: {
             fname: 'Jméno',
