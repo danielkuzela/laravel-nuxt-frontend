@@ -65,5 +65,12 @@ export const en_language_pack = {
                 email: 'Enter your e-mail address',
             }
         }
+    },
+
+    cookies: {
+        modal: {
+            title: 'Cookies settings',
+            text: 'In order to quickly find what you are looking for on our website, save you a lot of clicks and you do not see ads for things that do not interest you, we need your consent to the processing of cookies, ie small files that are stored in your browser.'
+        }
     }
 }

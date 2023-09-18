@@ -9,24 +9,27 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
+    "@dargmuesli/nuxt-cookie-control": "^6.4.2",
     "@nuxt/devtools": "latest",
     "@nuxt/image": "1.0.0-rc.1",
     "@nuxtjs/google-fonts": "^3.0.2",
     "@nuxtjs/i18n": "8.0.0-rc.2",
     "@nuxtjs/tailwindcss": "^6.8.0",
     "@types/node": "^18.17.14",
-    "nuxt": "^3.7.1"
+    "nuxt": "^3.7.1",
+    "nuxt-gtag": "^1.1.0",
+    "nuxt-simple-sitemap": "^3.2.8"
   },
   "dependencies": {
     "@pinia/nuxt": "^0.4.11",
     "aos": "^2.3.4",
     "moment": "^2.29.4",
     "nuxt-csurf": "^1.2.0",
-    "nuxt-gtag": "^0.6.2",
     "pinia": "^2.1.6",
     "styled-components": "^6.0.7",
     "vue-recaptcha-v3": "^2.0.1",
     "vue-ssr-carousel": "^2.3.2",
-    "vue3-carousel-nuxt": "^1.1.0"
+    "vue3-carousel-nuxt": "^1.1.0",
+    "vue3-google-map": "^0.17.1"
   }
 }

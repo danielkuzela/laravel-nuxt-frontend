@@ -4,19 +4,6 @@ import { darkModeKey } from '@/composables/config'
 
 export const useStyleStore = defineStore("style", {
     state: () => ({
-        /* Styles */
-
-        asideStyle: "",
-        asideScrollbarsStyle: "",
-        asideBrandStyle: "",
-        asideMenuItemStyle: "",
-        asideMenuItemActiveStyle: "",
-        asideMenuDropdownStyle: "",
-        navBarItemLabelStyle: "",
-        navBarItemLabelHoverStyle: "",
-        navBarItemLabelActiveColorStyle: "",
-        overlayStyle: "",
-
         /* Dark mode */
         darkMode: false,
     }),

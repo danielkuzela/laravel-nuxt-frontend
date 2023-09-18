@@ -1,11 +1,25 @@
+import { useRedirectStore } from "@/stores/redirect";
+
 export default defineNuxtRouteMiddleware(async (to, from) => {
 
+        const redirectStore = useRedirectStore();
+
+        // get config data
         const config = useRuntimeConfig()
 
-        // get redirects list from api
-        const { data: redirectData, error} = await useCustomFetch('/api/redirects')
+        // check if we have fetched data already
+        if(!redirectStore.fetched){
 
-        const redirects = await redirectData.value;
+                // get redirects list from api
+                const { data: redirectData, error} = await useCustomFetch('/api/redirects')
+
+                const redirects = await redirectData.value;
+
+                redirectStore.setRedirects(redirects);
+
+        }
+
+        const redirects = redirectStore.redirects;
 
         // Check if the current route needs to be redirected
         const matchingRedirect = redirects.find(redirect => redirect.from === to.path);

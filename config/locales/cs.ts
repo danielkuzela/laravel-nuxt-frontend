@@ -68,5 +68,12 @@ export const cs_language_pack = {
                 email: 'Zadejte svůj e-mail',
             }
         }
+    },
+
+    cookies: {
+        modal: {
+            title: 'Nastavení cookies',
+            text: 'Za účelem poskytování co nejlepšího uživatelského zážiku bychom od vás rádi získali souhlas se zpracováním souborů cookies, tj. malých souborů, které se ukládají ve vašem prohlížeči.'
+        }
     }
 }

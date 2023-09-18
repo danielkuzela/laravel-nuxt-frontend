@@ -40,26 +40,33 @@ watch(MobileMenuOpened, (newValue) => {
 </script>
 
 <template>
-    <div v-if="position == 'header'">
+    <nav v-if="position == 'header'">
       <ul class="hidden min-[1400px]:flex gap-5">
           <template v-for="item in menuData.items">
             <li v-if="item.parent_id == null && !item.submenu.length" class="flex items-center">
                 <NuxtLinkLocale
                         v-if="item.url.substring(0,4) != '#cta'"
                         :to="(item.is_homepage === true ? '/' : '/' + item.url)"
-                        :class="[ styleStore.navigationLinkStyle] ">{{ item.name }}</NuxtLinkLocale>
+                        :class="[ styleStore.navigationLinkStyle ]"
+                        :activeClass="styleStore.navigationLinkActiveStyle">{{ item.name }}</NuxtLinkLocale>
                 <button v-else
                         type="button"
                         @click="CTAModalOpened = !CTAModalOpened"
                         :class="[ styleStore.navigationLinkStyle, styleStore.navigationLinkCtaStyle ]">{{ item.name }}</button>
             </li>
             <li v-else-if="item.parent_id == null"
-                :class="[ styleStore.navigationLinkStyle, `flex items-center group/item relative` ]">
+                :class="[
+                    styleStore.navigationLinkStyle,
+                    `flex items-center group/item relative`,
+                ]">
                 {{ item.name }} <ElementsBaseIcon type="chevron_down" class="ml-1 -mr-2 group-hover/item:rotate-180 transition-all duration-300" />
                 <ul :class="[ styleStore.navigationDropdownWrapperStyle, `hidden group-hover/item:flex whitespace-nowrap` ] ">
                     <template v-for="subitem in item.submenu">
-                        <li >
-                            <NuxtLinkLocale :to="'/' + subitem.url" :class="[ styleStore.navigationDropdownLinkStyle ] ">{{ subitem.name }}</NuxtLinkLocale>
+                        <li>
+                            <NuxtLinkLocale
+                                    :to="'/' + subitem.url"
+                                    :class="[ styleStore.navigationDropdownLinkStyle ]"
+                                    :activeClass="styleStore.navigationDropdownLinkActiveStyle">{{ subitem.name }}</NuxtLinkLocale>
                         </li>
                     </template>
                 </ul>
@@ -71,8 +78,8 @@ watch(MobileMenuOpened, (newValue) => {
       <div class="hidden max-[1399px]:flex">
           <ElementsBaseButton @click="MobileMenuOpened = !MobileMenuOpened" icon="hamburger" color="basicDark" rounded-full></ElementsBaseButton>
       </div>
-    </div>
-  <div v-else>
+    </nav>
+    <div v-else>
       <Transition
               appear
               enter-from-class="opacity-0"
@@ -98,7 +105,8 @@ watch(MobileMenuOpened, (newValue) => {
                             <NuxtLinkLocale
                                     v-if="item.url.substring(0,4) != '#cta'"
                                     :to="(item.is_homepage === true ? '/' : '/' + item.url)"
-                                    :class="[ styleStore.navigationLinkStyle] ">{{ item.name }}</NuxtLinkLocale>
+                                    :class="[ styleStore.navigationLinkStyle] "
+                                    :activeClass="styleStore.navigationLinkActiveStyle">{{ item.name }}</NuxtLinkLocale>
                             <button v-else
                                     type="button"
                                     @click="CTAModalOpened = !CTAModalOpened"
@@ -111,5 +119,5 @@ watch(MobileMenuOpened, (newValue) => {
             </div>
         </div>
       </Transition>
-  </div>
+    </div>
 </template>
