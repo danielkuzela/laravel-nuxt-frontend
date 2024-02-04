@@ -1,4 +1,4 @@
-# Nuxt 3 template system for Foreground Admin 2.0
+# Nuxt 3 template system for Laravel v. 8
 
 Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
 
