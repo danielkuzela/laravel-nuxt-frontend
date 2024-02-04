@@ -13,7 +13,7 @@ styleStore.setStyle();
 useHead({
     titleTemplate: `${t('web.title')} | %s`,
     meta: [
-        { name: 'author', content: `FOREGROUND s.r.o.` },
+        { name: 'author', content: `Daniel Kužela` },
         { name: 'robots', content: `index,follow` }
     ]
 })
